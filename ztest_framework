@@ -1,0 +1,37 @@
+Correct Answer: p-value = 0.18, and hence people from the state are not shorter
+
+Explanation:
+
+# Null Hypothesis (H0): People from the person's state are not shorter than the national average height. (i.e.,μ = 65)
+# Alternative Hypothesis (Ha): People from the person's state are shorter than the national average height. (i.e.,μ < 65)
+
+import scipy.stats as stats
+
+# Population parameters
+population_mean = 65  # Population average height
+population_stddev = 2.5  # Population standard deviation
+
+# Sample statistics
+sample_mean = 64.5  
+sample_size = 20 # Average of 20 people
+
+# Calculate the standard error of the sample mean
+standard_error = population_stddev / (sample_size ** 0.5)
+
+# Calculate the Z-score
+z_score = (sample_mean - population_mean) / standard_error
+
+# Calculate the p-value: Left Tail Test
+p_value = stats.norm.cdf(z_score)
+
+# Significance level
+alpha = 0.05
+
+# Compare p-value with the significance level
+if p_value < alpha:
+    print(f"Reject the null hypothesis. People from the state are shorter.")
+else:
+    print(f"Fail to reject the null hypothesis. No significant evidence that people from the state are shorter.")
+
+print(f"Z-score: {z_score}")
+print(f"P-value: {p_value}")
